@@ -1,0 +1,152 @@
+﻿@model Diary.UI.Models.LawsuitInputModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add</h1>
+<hr />
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="Id" hidden />
+
+                    <div class="form-group row">
+                        <label asp-for="FileNo" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <input asp-for="FileNo" class="form-control" />
+                            <span asp-validation-for="FileNo" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="CategoryId" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <select asp-for="CategoryId" class="form-control custom-select" asp-items="Model.CategoryList"><option>Please select one</option></select>
+
+                            <span asp-validation-for="CourtsId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="CourtsId" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <select asp-for="CourtsId" class="form-control custom-select" asp-items="Model.CourtList"><option>Please select one</option></select>
+
+                            <span asp-validation-for="CourtsId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="ApplicationUserId" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <select asp-for="ApplicationUserId" class="form-control custom-select" asp-items="Model.ApplicationUserList"><option>Please select one</option></select>
+
+                            <span asp-validation-for="ApplicationUserId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Status" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <select asp-for="Status" class="form-control custom-select" asp-items="Html.GetEnumSelectList<Status>()"><option>Please status</option></select>
+
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Casetype" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <select asp-for="Casetype" class="form-control custom-select" asp-items="Html.GetEnumSelectList<Casetype>()"><option>Please status</option></select>
+
+                            <span asp-validation-for="Casetype" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="Description" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <textarea asp-for="Description" rows="4" class="form-control"> </textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-end">
+                        <div class="col-sm-9">
+                            <div>
+                                @if (Model.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary ">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary ">Submit</button>
+                                }
+
+                                <a class="btn btn-dark " asp-controller="lawsuits" asp-action="Index">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Client type</th>
+                                <th>Client Name</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>101</td>
+                                <td>Mickey Rung</td>
+                                <td>01-Jan-2021</td>
+                                <td><span class="badge badge-success">Approved</span></td>
+                                
+                            </tr>
+                            <tr>
+                                <td>102</td>
+                                <td>Ely Franze</td>
+                                <td>05-Feb-2021</td>
+                                <td><span class="badge badge-warning">Pending</span></td>
+                                
+                            </tr>
+                            <tr>
+                                <td>103</td>
+                                <td>Andrea Pame</td>
+                                <td>12-Feb-2021</td>
+                                <td><span class="badge badge-primary">Approved</span></td>
+                                
+                            </tr>
+                            <tr>
+                                <td>104</td>
+                                <td>Steve megan</td>
+                                <td>15-Feb-2021</td>
+                                <td><span class="badge badge-danger">Denied</span></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

@@ -1,0 +1,67 @@
+﻿@model Diary.UI.Models.CourtInputModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row">
+    <div class="col-xl-6 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group row">
+                        <label asp-for="CourtTypeId" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <select asp-for="CourtTypeId" class="form-control custom-select" asp-items=Model.CourtType><option>Please select one</option></select>
+
+                            <span asp-validation-for="CourtTypeId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="StateId" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <select asp-for="StateId" class="form-control custom-select" asp-items=Model.StateList><option>Please select one</option></select>
+
+                            <span asp-validation-for="StateId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="CityId" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <select asp-for="CityId" class="form-control custom-select" asp-items=Model.CityList><option>Please select one</option></select>
+
+                            <span asp-validation-for="CityId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="CourtName" class="col-sm-3 col-form-label text-sm-left"></label>
+                        <div class="col-sm-9">
+                            <input asp-for="CourtName" class="form-control" readonly />
+                            <span asp-validation-for="CourtName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-end">
+                        <div class="col-sm-9">
+                            <div>
+                                @if (Model.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary ">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary ">Submit</button>
+                                }
+
+                                <a class="btn btn-dark " asp-controller="Courts" asp-action="Index">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

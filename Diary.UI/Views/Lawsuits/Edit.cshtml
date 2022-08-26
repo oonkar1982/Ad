@@ -1,0 +1,211 @@
+﻿@model Diary.UI.Models.LawsuitEditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+
+
+    <!-- Tabs navs -->
+<ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="ex-with-icons-tab-1" data-toggle="tab" href="#ex-with-icons-tabs-1" role="tab"
+           aria-controls="ex-with-icons-tabs-1" aria-selected="true"><i class="fas fa-chart-pie fa-fw me-2">Sales</i>                    </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="ex-with-icons-tab-2" data-toggle="tab" href="#ex-with-icons-tabs-2" role="tab"
+           aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="fas fa-chart-line fa-fw me-2"></i>Subscriptions</a>
+    </li>
+
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="ex-with-icons-tab-3" data-toggle="tab" href="#ex-with-icons-tabs-3" role="tab" 
+           aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="fas fa-chart-line fa-fw me-2"></i>Documents</a>
+    </li>
+
+</ul>
+    <!-- Tabs navs -->
+<div class="tab-content" id="ex-with-icons-content">
+    <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
+        <div class="row">
+            <div class="col-xl-6 col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group row">
+                                <label asp-for="Id" class="col-sm-3 col-form-label text-sm-left"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="Id" class="form-control" />
+                                    <span asp-validation-for="Id" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="FileNo" class="col-sm-3 col-form-label text-sm-left"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="FileNo" class="form-control" />
+                                    <span asp-validation-for="FileNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="Description" class="col-sm-3 col-form-label text-sm-left"></label>
+                                <div class="col-sm-9">
+                                    <textarea asp-for="Description" rows="4" class="form-control"> </textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @*<label asp-for="CustomersId" class="col-sm-3 col-form-label text-sm-left"></label>
+                                    <div class="col-sm-9">
+
+                                        <select asp-for="CustomersId" class="form-control custom-select" asp-items="Model.CustomersList"><option>Please select one</option></select>
+                                        <span asp-validation-for="CustomersId" class="text-danger"></span>
+                                    </div>*@
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="CourtsId" class="col-sm-3 col-form-label text-sm-left"></label>
+                                <div class="col-sm-9">
+                                    <select asp-for="CourtsId" class="form-control custom-select" asp-items="Model.CourtList"><option>Please select one</option></select>
+
+                                    <span asp-validation-for="CourtsId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label asp-for="ApplicationUserId" class="col-sm-3 col-form-label text-sm-left"></label>
+                                <div class="col-sm-9">
+                                    <select asp-for="ApplicationUserId" class="form-control custom-select" asp-items="Model.ApplicationUserList"><option>Please select one</option></select>
+
+                                    <span asp-validation-for="ApplicationUserId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="Status" class="col-sm-3 col-form-label text-sm-left"></label>
+                                <div class="col-sm-9">
+                                    <select asp-for="Status" class="form-control custom-select" asp-items="Html.GetEnumSelectList<Status>()"><option>Please status</option></select>
+
+                                    <span asp-validation-for="Status" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="Casetype" class="col-sm-3 col-form-label text-sm-left"></label>
+                                <div class="col-sm-9">
+                                    <select asp-for="Casetype" class="form-control custom-select" asp-items="Html.GetEnumSelectList<Casetype>()"><option>Please status</option></select>
+
+                                    <span asp-validation-for="Casetype" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row justify-content-end">
+                                <div class="col-sm-9">
+                                    <div>
+                                        @if (Model.Id != 0)
+                                        {
+                                            <button type="submit" class="btn btn-primary ">Update</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn btn-primary ">Submit</button>
+                                        }
+
+                                        <a class="btn btn-dark " asp-controller="lawsuits" asp-action="Index">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-5">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="table-responsive no-padding">
+                            <table class="table table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Client type</th>
+                                        <th>Client Name</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CustomersList)
+                                    {
+                                        <tr>
+                                            <td>@item.ClientType</td>
+                                            <td>@item.ClientName</td>
+                                            <td>@item.Address</td>
+                                            <td><span class="badge badge-success">@item.Phone</span></td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <a onclick="showInPopup('@Url.Action("AddHearing","Lawsuits",new { id=Model.Id},Context.Request.Scheme)','New Transaction')" class="btn btn-success text-white"><i class="fas fa-random"></i> New Transaction</a>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class=" table table-centered table-nowrap mb-0">
+                                <thead class="thead-success">
+                                    <tr>
+                                        <th>
+                                            <a onclick="showInPopup('@Url.Action("AddHearing","Lawsuits",new { id=Model.Id},Context.Request.Scheme)','Add Comments')" class="btn btn-success text-white"><i class="fas fa-random"></i> Add Comments</a>
+                                        </th>
+                                        <th>Particulars</th>
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.HearingsList)
+                                    {
+
+                                        <tr>
+                                            <th>  @item.CreateOn.ToString("dd-MMM-yy")</th>
+                                            <th>  @item.Description</th>
+                                        </tr>
+
+
+
+                                    }
+                                </tbody>
+
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
+
+      
+      
+    </div>
+</div>
+
+    @section Scripts{
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

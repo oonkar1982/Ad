@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Diary.UI.Models.Message>
+
+@{ int rowNo = 0; }
+<h3 class="h3 mb-3">
+    Advanced DataTable <span class="text-sm">
+        preview of jQuery Datatable
+        Plugin.
+    </span>
+</h3>
+<table id="example" class="table">
+    <thead class="thead-primary">
+        <tr>
+            <th>#</th>
+            <th>Subject</th>
+            <th>Body</th>
+            <th><a class="btn btn-danger text-white btnEdit clsShow" asp-action="AddorEdit">Add</a></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() >= 0)
+        {
+
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>  @(rowNo += 1)</th>
+                    <th>
+                        @item.Subject
+                    </th>
+                    <th>
+                        @item.MessageBody
+                    </th>
+
+                    <th>
+                        <a class="btn btn-primary text-white btnEdit clsShow" asp-action="AddorEdit" asp-route-id="@item.Id">
+                            Edit
+                        </a>
+
+                    </th>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+

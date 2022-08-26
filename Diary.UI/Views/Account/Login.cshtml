@@ -1,0 +1,67 @@
+﻿@model Diary.UI.Models.LoginModel
+
+@{
+    Layout = null;
+}
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+      
+        <title>Login </title>
+
+        <!-- Begin Global Level Styles -->
+        <link href="~/css/site.css" rel="stylesheet" type="text/css">
+        <!-- End Global Level Styles -->
+
+    </head>
+    <body>
+
+        <!--Begin container div -->
+        <div class="container">
+
+            <form class="myLoginForm" asp-action="Login">
+                <div class="row justify-content-md-center">
+                    <div class="col-xl-4 col-lg-5 col-md-5 col-sm-6 col-12">
+                        <div class="login-screen">
+                            <div class="login-box">
+                                <h1 class="text-primary mb-2">
+                                    Sign In
+                                </h1>
+                                <h5 class="text-muted pb-2">Please Login to your Account.</h5>
+                                <div class="form-group row">
+                                    <label asp-for="Email" class="col-sm-3 col-form-label text-sm-left"></label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="Email" class="form-control" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="Password" class="col-sm-3 col-form-label text-sm-left"></label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="Password" class="form-control" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row justify-content-end">
+                                    <div class="col-sm-9">
+                                        <div>
+
+                                            <button type="submit" class="btn btn-primary ">Login</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>   <!--  end login screen -->
+                    </div> <!-- end cold-->
+                </div> <!-- end row -->
+            </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Diary.UI.Models.SMSViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{ int rowNo = 0; }
+<a class="btn btn-danger text-white btnEdit clsShow" asp-action="Create">Add</a>
+<table id="example" class="table">
+    <thead class="thead-primary">
+        <tr>
+            <th>#</th>
+            <th>Recipient</th>
+            <th>PhoneNo</th>
+            <th>Message</th>
+            <th>Is Send</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() >= 0)
+        {
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th> @(rowNo += 1)</th>
+                    <th>
+                        @item.Recipient
+                    </th>
+                    <th>
+                        @item.PhoneNo
+                    </th>
+                    <th>
+                        @item.Message
+                    </th>
+                    <th>
+                        @item.IsSend
+                    </th>
+
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+@section Scripts{
+
+    <link href="~/css/datatables.css" rel="stylesheet" />
+    <script>
+
+        $(document).ready(function () {
+
+
+            $('#example').DataTable();
+
+        });
+
+    </script>
+}
+
+
