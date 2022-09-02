@@ -5,9 +5,6 @@
 }
 
 
-
-
-
     <!-- Tabs navs -->
 <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
     <li class="nav-item" role="presentation">
@@ -16,7 +13,7 @@
     </li>
     <li class="nav-item" role="presentation">
         <a class="nav-link" id="ex-with-icons-tab-2" data-toggle="tab" href="#ex-with-icons-tabs-2" role="tab"
-           aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="fas fa-chart-line fa-fw me-2"></i>Subscriptions</a>
+           aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="fas fa-chart-line fa-fw me-2"></i>Hearing Info</a>
     </li>
 
     <li class="nav-item" role="presentation">
@@ -121,7 +118,7 @@
             </div>
             <div class="col-xl-6 col-md-5">
                 <div class="card">
-
+                    <a onclick="showInPopup('@Url.Action("AddorEdit","Customers",new { id=Model.Id},Context.Request.Scheme)','New Client')" class="btn btn-success text-white"><i class="fas fa-random"></i> New Client</a>
                     <div class="card-body">
                         <div class="table-responsive no-padding">
                             <table class="table table-hover">
@@ -201,8 +198,8 @@
 
     <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
 
-      
-      
+        @await Html.PartialAsync("_Documents", @Model.DoucmentList)
+
     </div>
 </div>
 

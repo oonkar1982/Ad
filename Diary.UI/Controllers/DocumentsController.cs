@@ -30,7 +30,7 @@ namespace Diary.UI.Controllers
             {
                 Id = 1;
             }
-            var documents = await _context.Documents.Where(f => f.Lawsuit == Id).ToListAsync();
+            var documents = await _context.Documents.Where(f => f.LawsuitId == Id).ToListAsync();
             return View(documents);
         }
         public IActionResult UploadFile()
@@ -56,9 +56,9 @@ namespace Diary.UI.Controllers
                     Content = memoryStream.ToArray();
                     Document document = new Document()
                     {
-                        Lawsuit = 1,
+                        LawsuitId = 1,
                         Data = Content,
-                        fileName = filename,
+                        FileName = filename,
                         ContentType = contentType
                     };
 
@@ -80,7 +80,7 @@ namespace Diary.UI.Controllers
             var file = await _context.Documents.FindAsync(id);
 
             if (file == null) return null;
-            return File(file.Data, file.ContentType, file.fileName);
+            return File(file.Data, file.ContentType, file.FileName);
         }
         byte[] ReadFile(string sPath)
         {

@@ -31,7 +31,7 @@ namespace Diary.UI.Controllers
             var item = _context.Lawsuits.Select(x => new LawsuitViewModel()
             {
                 Id = x.Id,
-                Customer = x.Customers.Select(x => x.CustomerName).FirstOrDefault(),
+                Customer = x.Customers.Select(x => x.ClientName).FirstOrDefault(),
                 CaseCategory = x.CaseCategory.Category,
                 Court = x.Courts.CourtName,
                 Description = x.Description,
@@ -56,7 +56,7 @@ namespace Diary.UI.Controllers
                 CategoryList= (List<SelectListItem>)_context.CaseCategories.Select(e => new SelectListItem { Value = e.Id.ToString(), Text = e.Category }).ToList(),
                 ApplicationUserList = (List<SelectListItem>)_context.ApplicationUsers.Select(e => new SelectListItem { Value = e.Id.ToString(), Text = e.Name }).ToList(),
                 CourtList = (List<SelectListItem>)_context.Court.Select(e => new SelectListItem { Value = e.Id.ToString(), Text = e.CourtName }).ToList(),
-                CustomersList = (List<SelectListItem>)_context.Customers.Select(e => new SelectListItem { Value = e.Id.ToString(), Text = e.CustomerName }).ToList()
+                CustomersList = (List<SelectListItem>)_context.Customers.Select(e => new SelectListItem { Value = e.Id.ToString(), Text = e.ClientName }).ToList()
             };
             return View(model);
         }
@@ -110,7 +110,11 @@ namespace Diary.UI.Controllers
                     Description = e.Description,
                     CreateOn = e.CreateOn
                 }).ToList(),
-                
+                DoucmentList = (ICollection<DocumentViewModel>)x.Documents.Where(x => x.LawsuitId == id).Select(e => new DocumentViewModel()
+                {
+                 FileName=e.FileName,ContentType=e.ContentType,Id=e.Id
+                }).ToList(),
+
                 ApplicationUserList = (List<SelectListItem>)_context.ApplicationUsers.Select(e => new SelectListItem { Value = e.Id.ToString(), Text = e.Name }).ToList(),
                 CourtList = (List<SelectListItem>)_context.Court.Select(e => new SelectListItem { Value = e.Id.ToString(), Text = e.CourtName }).ToList(),
                 CustomersList = x.Customers.Where(x => x.Lawsuit.Id==id).ToList()
@@ -247,9 +251,12 @@ namespace Diary.UI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
        
-        public IActionResult AddHearing(int id,  HearingViewModel item)
+        public IActionResult AddHearing(int Id,  HearingViewModel item)
         {
-            
+            if(Id != item.Id)
+            {
+                return NotFound();
+            }
 
             if (ModelState.IsValid)
             {
@@ -281,8 +288,50 @@ namespace Diary.UI.Controllers
             {
                 Id = 1;
             }
-            var documents = await _context.Documents.Where(f => f.Lawsuit == Id).ToListAsync();
+            var documents = await _context.Documents.Where(f => f.LawsuitId == Id).ToListAsync();
             return PartialView("_Documents", documents);
+        }
+        public IActionResult UploadFile()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public async Task<IActionResult> UploadFile(IFormFile FormFile)
+        {
+            byte[] Content;
+
+
+            string filename = Path.GetFileName(FormFile.FileName);
+            string contentType = FormFile.ContentType;
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await FormFile.CopyToAsync(memoryStream);
+
+                if (memoryStream.Length < 2097152)
+                {
+
+                    Content = memoryStream.ToArray();
+                    Document document = new Document()
+                    {
+                        LawsuitId = 1,
+                        Data = Content,
+                        FileName = filename,
+                        ContentType = contentType
+                    };
+
+                    _context.Documents.Add(document);
+                    _context.SaveChanges();
+
+                }
+                else
+                {
+                    ModelState.AddModelError("File", "The file is too large.");
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
+
         }
 
     }

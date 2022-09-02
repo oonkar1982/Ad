@@ -13,13 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.fileName)
+                @Html.DisplayNameFor(model => model.FileName)
             </th>
             
-            <th>
-                @Html.DisplayNameFor(model => model.Lawsuit)
-            </th>
-            
+           
             <th></th>
         </tr>
     </thead>
@@ -27,13 +24,8 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.fileName)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.Lawsuit)
-            </td>
-           
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>  
             <td>
                 <a asp-action="DownloadFileFromFileSystem" asp-route-id="@item.Id">Edit</a> |
                

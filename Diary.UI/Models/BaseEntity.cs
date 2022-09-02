@@ -17,6 +17,7 @@ namespace Diary.UI.Models
         public Lawsuit()
         {
             this.Hearings = new HashSet<Hearing>();
+            this.Documents = new HashSet<Document>();
             this.Customers = new HashSet<Customer>();
             this.CreateOn = DateTime.Now;
         }
@@ -31,14 +32,20 @@ namespace Diary.UI.Models
         public DateTime CreateOn { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Hearing> Hearings { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
     }
 
+    public  class CustomerLawsuit :BaseEntity
+    {
+        public Lawsuit Lawsuit { get; set; }
+        public Customer customer { get; set; }
+    }
     
     public class Document :BaseEntity
     {
-        public string fileName { get; set; }
+        public string FileName { get; set; }
         public string ContentType { get; set; }
-        public int Lawsuit { get; set; }
+        public int LawsuitId { get; set; }
         public byte[] Data { get; set; }
       
 
@@ -86,8 +93,7 @@ namespace Diary.UI.Models
     }
     public class Customer : BaseEntity
     {
-        public virtual Lawsuit Lawsuit { get; set; }
-        public string CustomerName { get; set; }
+        public virtual Lawsuit Lawsuit { get; set; }       
         public ClientType ClientType { get; set; }
         public string ClientName { get; set; }
         public string Address { get; set; }

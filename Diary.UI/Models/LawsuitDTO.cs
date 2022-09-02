@@ -40,8 +40,7 @@ namespace Diary.UI.Models
                     Description = x.Description,
                     Casetype = x.Casetype.ToString(),
                     CreateOn=x.CreateOn,
-                    Status = x.Status.ToString()
-                   
+                    Status = x.Status.ToString()                   
                 };
 
             }
@@ -89,7 +88,8 @@ namespace Diary.UI.Models
         public List<SelectListItem> ApplicationUserList { get; set; }
         public List<SelectListItem> CourtList { get; set; }
         public ICollection<HearingViewModel> HearingsList { get; set; }
-                
+        public ICollection<DocumentViewModel> DoucmentList { get; set; }
+
 
     }
     public class HearingViewModel
@@ -131,5 +131,10 @@ namespace Diary.UI.Models
 
     }
 
-
+    public class DocumentViewModel
+    {
+        public string FileName { get; set; }
+        public string ContentType { get; set; }
+        public int Id { get; set; }
+    }
 }

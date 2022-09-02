@@ -1,0 +1,56 @@
+﻿@model Diary.UI.Models.Customer
+@{ Layout = null; }
+
+<div>
+    <form asp-controller="Customers" asp-action="AddorEdit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group row">
+            <label asp-for="ClientName" class="col-sm-3 col-form-label text-sm-left"></label>
+            <div class="col-sm-9">
+                <input asp-for="ClientName" class="form-control"  />
+                <span asp-validation-for="ClientName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Address" class="col-sm-3 col-form-label text-sm-left"></label>
+            <div class="col-sm-9">
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Phone" class="col-sm-3 col-form-label text-sm-left"></label>
+            <div class="col-sm-9">
+                <input asp-for="Phone" class="form-control"  />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="SendSMS" class="col-sm-3 col-form-label text-sm-left"></label>
+            <div class="col-sm-9">
+                <input asp-for="SendSMS" class="form-check-input" />@Html.DisplayNameFor(model => model.SendSMS)
+                <span asp-validation-for="SendSMS" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <div class="form-group row justify-content-end">
+            <div class="col-sm-9">
+                <div>
+                    @if (Model.Id != 0)
+                    {
+                        <button type="submit" class="btn btn-primary ">Update</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary ">Submit</button>
+                    }
+
+                    <a class="btn btn-dark "  asp-action="Index">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

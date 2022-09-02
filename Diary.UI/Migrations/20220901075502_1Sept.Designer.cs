@@ -4,14 +4,16 @@ using Diary.UI.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Diary.UI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220901075502_1Sept")]
+    partial class _1Sept
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,12 +185,10 @@ namespace Diary.UI.Migrations
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LawsuitId")
+                    b.Property<int>("Lawsuit")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LawsuitId");
 
                     b.ToTable("Documents");
                 });
@@ -397,15 +397,6 @@ namespace Diary.UI.Migrations
                     b.Navigation("Lawsuit");
                 });
 
-            modelBuilder.Entity("Diary.UI.Models.Document", b =>
-                {
-                    b.HasOne("Diary.UI.Models.Lawsuit", null)
-                        .WithMany("Documents")
-                        .HasForeignKey("LawsuitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Diary.UI.Models.Hearing", b =>
                 {
                     b.HasOne("Diary.UI.Models.Lawsuit", "Lawsuits")
@@ -457,8 +448,6 @@ namespace Diary.UI.Migrations
             modelBuilder.Entity("Diary.UI.Models.Lawsuit", b =>
                 {
                     b.Navigation("Customers");
-
-                    b.Navigation("Documents");
 
                     b.Navigation("Hearings");
                 });
